@@ -3,6 +3,8 @@ package com.example.flixter.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.flixter.GlideApp;
 import com.example.flixter.MovieDetailsActivity;
 import com.example.flixter.R;
 import com.example.flixter.models.Movie;
@@ -71,6 +74,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
             itemView.setOnClickListener(this);
+
         }
 
         public void bind(Movie movie) {
@@ -79,16 +83,24 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             String imageUrl;
             // If phone is in landscape
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                GlideApp.with(context)
+                        .load("flicks_backdrop_placeholder.gif")
+                        .placeholder(R.drawable.flicks_backdrop_placeholder)
+                        .into(ivPoster);
                 // then imageUrl = back drop image
                 imageUrl = movie.getBackdropPath();
             }
 
             // else imageUrl = poster image
             else {
+                GlideApp.with(context)
+                        .load("flicks_movie_placeholder.gif")
+                        .placeholder(R.drawable.flicks_movie_placeholder)
+                        .into(ivPoster);
                 imageUrl = movie.getPosterPath();
             }
+            
             Glide.with(context).load(imageUrl).into(ivPoster);
-
         }
 
         @Override
