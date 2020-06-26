@@ -62,9 +62,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 JSONObject jsonObject = json.jsonObject;
                 try {
-                    JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "Results: " + results.toString());
-                    youtubeID = results.getJSONObject(0).getString("key");
+
+                    if (jsonObject.getJSONArray("results").length() > 0) {
+
+                        JSONArray results = jsonObject.getJSONArray("results");
+                        Log.i(TAG, "Results: " + results.toString());
+
+                        youtubeID = results.getJSONObject(0).getString("key");
+                    }
 
                     // Put setOnClickListener here because it is asynchronous and only want it to be clickable if retrieve a key
                     ivBackdrop.setOnClickListener(new View.OnClickListener() {
