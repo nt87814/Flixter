@@ -49,6 +49,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         binding.tvTitle.setText(movie.getTitle());
         binding.tvOverview.setText(movie.getOverview());
+
+        // Divide by 2 because getVoteAverage is out of 10 and star rating it out of 5
         binding.rbVoteAverage.setRating((float) (movie.getVoteAverage() / 2));
 //        Glide.with(this).load(movie.getBackdropPath()).transform(new RoundedCorners(30)).into(ivBackdrop);
         Glide.with(this).load(movie.getBackdropPath()).into(ivBackdrop);
