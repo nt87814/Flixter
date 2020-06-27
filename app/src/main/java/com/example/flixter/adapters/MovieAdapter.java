@@ -82,24 +82,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             String imageUrl;
+            String placeholdRes;
             // If phone is in landscape
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                GlideApp.with(context)
-                        .load("flicks_backdrop_placeholder.gif")
-                        .placeholder(R.drawable.flicks_backdrop_placeholder)
-                        .into(ivPoster);
+                placeholdRes = "flicks_backdrop_placeholder";
                 // then imageUrl = back drop image
                 imageUrl = movie.getBackdropPath();
             }
 
             // else imageUrl = poster image
             else {
-                GlideApp.with(context)
-                        .load("flicks_movie_placeholder.gif")
-                        .placeholder(R.drawable.flicks_movie_placeholder)
-                        .into(ivPoster);
+                placeholdRes = "flicks_movie_placeholder";
                 imageUrl = movie.getPosterPath();
             }
+            GlideApp.with(context)
+                    .load(placeholdRes + ".gif")
+                    .placeholder(R.drawable.flicks_backdrop_placeholder)
+                    .into(ivPoster);
 
             Glide.with(context).load(imageUrl).transform(new RoundedCorners(30)).into(ivPoster);
         }
