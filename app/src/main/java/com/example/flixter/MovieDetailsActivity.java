@@ -45,14 +45,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
 //        Log.d("MovieDetailsActivity", String.format("Showing details for '%s'", movie.getTitle()));
 
-        tvTitle = binding.tvTitle;
-        tvOverview = binding.tvOverview;
-        rbVoteAverage = binding.rbVoteAverage;
         ivBackdrop = binding.ivBackdrop;
 
-        tvTitle.setText(movie.getTitle());
-        tvOverview.setText(movie.getOverview());
-        rbVoteAverage.setRating((float) (movie.getVoteAverage() / 2));
+        binding.tvTitle.setText(movie.getTitle());
+        binding.tvOverview.setText(movie.getOverview());
+        binding.rbVoteAverage.setRating((float) (movie.getVoteAverage() / 2));
+//        Glide.with(this).load(movie.getBackdropPath()).transform(new RoundedCorners(30)).into(ivBackdrop);
         Glide.with(this).load(movie.getBackdropPath()).into(ivBackdrop);
 
         // Get the YouTube ID of the video
